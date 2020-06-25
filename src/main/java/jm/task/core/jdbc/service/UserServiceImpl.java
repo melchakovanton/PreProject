@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.service;
 
+import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
@@ -7,35 +8,36 @@ import jm.task.core.jdbc.util.Util;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+    private final UserDao userDao = UserDaoJDBCImpl.getInstance(Util.getMysqlConnection());
 
     @Override
     public void createUsersTable() {
-        getUserDaoJDBC().createUsersTable();
+        userDao.createUsersTable();
     }
 
     public void dropUsersTable() {
-        getUserDaoJDBC().dropUsersTable();
+        userDao.dropUsersTable();
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        getUserDaoJDBC().saveUser(name, lastName, age);
+        userDao.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
-        getUserDaoJDBC().removeUserById(id);
+        userDao.removeUserById(id);
     }
 
     public List<User> getAllUsers() {
-        return getUserDaoJDBC().getAllUsers();
+        return userDao.getAllUsers();
     }
 
     public void cleanUsersTable() {
-        getUserDaoJDBC().cleanUsersTable();
+        userDao.cleanUsersTable();
     }
 
-    private static UserDaoJDBCImpl getUserDaoJDBC() {
-        return new UserDaoJDBCImpl(Util.getMysqlConnection());
-    }
+//    private static UserDaoJDBCImpl getUserDaoJDBC() {
+//        return new UserDaoJDBCImpl(Util.getMysqlConnection());
+//    }
 
 
 }

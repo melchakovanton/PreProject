@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,13 +8,17 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     private Connection connection;
+    private static UserDaoJDBCImpl userDaoJDBC;
 
-    public UserDaoJDBCImpl() {
-
+    private UserDaoJDBCImpl(Connection connection) {
+        this.connection = connection;
     }
 
-    public UserDaoJDBCImpl(Connection connection) {
-        this.connection = connection;
+    public static UserDaoJDBCImpl getInstance(Connection connection) {
+        if (userDaoJDBC == null) {
+            userDaoJDBC = new UserDaoJDBCImpl(connection);
+        }
+        return userDaoJDBC;
     }
 
     @Override
