@@ -1,15 +1,19 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class Main {
+    private final static UserService userService = UserServiceImpl.getInstance();
 
+
+    //Сделать Синглтон из сервиса
     public static void main(String[] args) {
-        UserService userService = new UserServiceImpl();
 
         userService.createUsersTable();
 
