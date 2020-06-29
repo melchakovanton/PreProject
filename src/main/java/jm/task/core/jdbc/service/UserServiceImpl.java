@@ -13,14 +13,11 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl userService;
-    private SessionFactory sessionFactory;
-    private Session session;
 
-//    private final UserDao userDao = UserDaoJDBCImpl.getInstance(Util.getMysqlConnection());
+    //    private final UserDao userDao = UserDaoJDBCImpl.getInstance(Util.getMysqlConnection());
     private final UserDao userDao = UserDaoHibernateImpl.getInstance();
 
-    public UserServiceImpl() {
-        this.sessionFactory = Util.getSessionFactory();
+    private UserServiceImpl() {
     }
 
     public static UserServiceImpl getInstance() {
